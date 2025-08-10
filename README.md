@@ -1,2 +1,1 @@
-# Lista-de-Tarefas
-Um app de lista de tarefas usando React JS
+Projeto "Lista de Tarefas" usando Vite + React 
