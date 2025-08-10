@@ -16,7 +16,9 @@ function App() {
       alert("Primeiro entre com a tarefa")
       return
     }
-    console.log(input)
+    
+    setTasks([...tasks, input])
+    setInput("")
   }
 
   return (
@@ -41,7 +43,7 @@ function App() {
               {
                 tasks && tasks.map((item, index) => (
                   <div className="item" key={index}>
-                    <span>{index}. {item}</span>
+                    <span>{index + 1}. {item}</span>
                     <button>Remover</button>
                     <button>Editar</button>
                   </div>
