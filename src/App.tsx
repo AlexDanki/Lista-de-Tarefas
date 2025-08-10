@@ -4,6 +4,11 @@ import './App.css'
 function App() {
 
   const [input, setInput] = useState("")
+  const [tasks, setTasks] = useState([
+    "Estudar react",
+    "Estudar eletrodinâmica",
+    "Estudar desenvolvimento de jogos"
+  ]);
 
   function handleAdd()
   {
@@ -33,11 +38,16 @@ function App() {
 
             <div className="list-area">
 
-              <div className="item">
-                <span>1. Item</span>
-                <button>Remover</button>
-                <button>Editar</button>
-              </div>
+              {
+                tasks && tasks.map((item, index) => (
+                  <div className="item" key={index}>
+                    <span>{index}. {item}</span>
+                    <button>Remover</button>
+                    <button>Editar</button>
+                  </div>
+                ))
+              }
+              
 
             </div>
 
