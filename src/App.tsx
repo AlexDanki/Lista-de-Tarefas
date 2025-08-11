@@ -21,6 +21,12 @@ function App() {
     setInput("")
   }
 
+  function handleRemove(item: string)
+  {
+    const novaLista = tasks.filter(i => i !== item)
+    setTasks(novaLista)
+  }
+
   return (
     <div>
 
@@ -52,7 +58,7 @@ function App() {
                 tasks && tasks.map((item, index) => (
                   <div className="item" key={index}>
                     <span className='item-txt'>{index + 1}. {item}</span>
-                    <button>Remover</button>
+                    <button onClick={()=> handleRemove(item)}>Remover</button>
                     <button>Editar</button>
                   </div>
                 ))
