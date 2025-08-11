@@ -4,11 +4,7 @@ import './App.css'
 function App() {
 
   const [input, setInput] = useState("")
-  const [tasks, setTasks] = useState([
-    "Estudar react",
-    "Estudar eletrodinâmica",
-    "Estudar desenvolvimento de jogos"
-  ]);
+  const [tasks, setTasks] = useState([]);
 
   const[editItem, setEditItem] = useState({
     enabled: false,
@@ -16,6 +12,8 @@ function App() {
   })
 
   const [buttonText, setButtonText] = useState("ADICIONAR")
+
+  const [concluidos, setConcluidos] = useState([])
 
   function handleAdd()
   {
@@ -35,6 +33,7 @@ function App() {
     }
     
     setTasks([...tasks, input])
+    setConcluidos([...concluidos, 0])
     setInput("")
   }
 
@@ -51,6 +50,21 @@ function App() {
       index:index
     })
     setButtonText("SALVAR")
+  }
+
+  function desabilitarTask(i: number, ischecked: boolean)
+  {
+
+    let value = 0;
+
+    if(ischecked ){
+        value =  1
+    }
+
+    const newList = [...concluidos]
+    newList[i] = value;
+    setConcluidos(newList)
+    console.log(newList);
   }
 
   return (
@@ -83,10 +97,12 @@ function App() {
               {
                 tasks && tasks.map((item, index) => (
                   <div className="item" key={index}>
-                    <input type="checkbox" />
+                    <input onChange={(e) => desabilitarTask(index, e.target.checked)}
+                    type="checkbox" />
                     <span className='item-txt'>{item}</span>
-                    <button onClick={()=> handleRemove(item)}>Remover</button>
-                    <button onClick={()=> handleEdit(index)}>Editar</button>
+                    
+                    <button style={{display: concluidos[index]? "none" : "block"}} onClick={()=> handleRemove(item)}>Remover</button>
+                    <button style={{display: concluidos[index]? "none" : "block"}} onClick={()=> handleEdit(index)}>Editar</button>
                   </div>
                 ))
               }
