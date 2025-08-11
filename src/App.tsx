@@ -10,10 +10,24 @@ function App() {
     "Estudar desenvolvimento de jogos"
   ]);
 
+  const[editItem, setEditItem] = useState({
+    enabled: false,
+    index: 0
+  })
+
   function handleAdd()
   {
     if(!input){
       alert("Primeiro entre com a tarefa")
+      return
+    }
+
+    if(editItem.enabled){
+      const novasTasks = [...tasks]
+      novasTasks[editItem.index] = input
+      setTasks(novasTasks)
+      setInput("")
+      editItem.enabled = false
       return
     }
     
@@ -25,6 +39,14 @@ function App() {
   {
     const novaLista = tasks.filter(i => i !== item)
     setTasks(novaLista)
+  }
+
+  function handleEdit(index: number){
+    setInput(tasks[index])
+    setEditItem({
+      enabled: true,
+      index:index
+    })
   }
 
   return (
@@ -57,9 +79,10 @@ function App() {
               {
                 tasks && tasks.map((item, index) => (
                   <div className="item" key={index}>
-                    <span className='item-txt'>{index + 1}. {item}</span>
+                    <input type="checkbox" />
+                    <span className='item-txt'>{item}</span>
                     <button onClick={()=> handleRemove(item)}>Remover</button>
-                    <button>Editar</button>
+                    <button onClick={()=> handleEdit(index)}>Editar</button>
                   </div>
                 ))
               }
