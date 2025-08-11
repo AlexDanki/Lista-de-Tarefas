@@ -1,0 +1,69 @@
+
+
+.content-box{
+  width:100%;
+  height:100vh;
+  background-color: #ccc;
+}
+
+.content-main{
+  max-width: 470px;
+  margin:0 auto;
+  padding:8px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-head, .list-area{
+  width: 100%;
+  
+}
+
+.content-head{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding:14px 25px;
+  margin-bottom:14px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.input-button{
+  display: flex;
+  width: 100%;
+  gap: 4px;
+}
+
+.input-button input{
+  width:100%;
+  padding:8px;
+  border:1px solid #ccc;
+}
+
+.input-button button{
+  color:rgb(31, 177, 177);
+  background-color: transparent;
+  padding:8px;
+  border:1px solid rgb(31, 177, 177);
+}
+
+.item{
+  display: flex;
+  background-color: #fff;
+  padding:8px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  gap:4px;
+}
+
+.item .item-txt{
+  width:100%;
+}
+
+.item button{
+  color:rgb(31, 177, 177);
+  background-color: transparent;
+  border:1px solid rgb(31, 177, 177);
+  padding: 2px;
+}
