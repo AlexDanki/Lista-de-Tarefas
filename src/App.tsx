@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
 
   const [input, setInput] = useState("")
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<string[]>([]);
 
   const[editItem, setEditItem] = useState({
     enabled: false,
@@ -13,7 +13,11 @@ function App() {
 
   const [buttonText, setButtonText] = useState("ADICIONAR")
 
-  const [concluidos, setConcluidos] = useState([])
+  const [concluidos, setConcluidos] = useState<string[]>([])
+
+  useEffect(()=>{
+
+  },[])
 
   function handleAdd()
   {
@@ -26,6 +30,7 @@ function App() {
       const novasTasks = [...tasks]
       novasTasks[editItem.index] = input
       setTasks(novasTasks)
+      localStorage.setItem("alexDev@test2", JSON.stringify(novasTasks))
       setInput("")
       editItem.enabled = false
       setButtonText("ADICIONAR")
@@ -33,6 +38,8 @@ function App() {
     }
     
     setTasks([...tasks, input])
+    localStorage.setItem("alexDev@test2", JSON.stringify([...tasks, input]))
+
     setConcluidos([...concluidos, 0])
     setInput("")
   }
@@ -41,6 +48,7 @@ function App() {
   {
     const novaLista = tasks.filter(i => i !== item)
     setTasks(novaLista)
+    localStorage.setItem("alexDev@test2", JSON.stringify(novaLista))
   }
 
   function handleEdit(index: number){
