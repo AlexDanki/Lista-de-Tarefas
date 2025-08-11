@@ -52,11 +52,15 @@ function App() {
     setInput("")
   }
 
-  function handleRemove(item: string)
+  function handleRemove(item: string, index: number)
   {
     const novaLista = tasks.filter(i => i !== item)
     setTasks(novaLista)
     localStorage.setItem("alexDev@test2", JSON.stringify(novaLista))
+
+     const indexRemoved = concluidos.filter((_, i) => i !== index)
+     setConcluidos(indexRemoved)
+     localStorage.setItem("concluidoskey", JSON.stringify(indexRemoved))
   }
 
   function handleEdit(index: number){
@@ -117,7 +121,7 @@ function App() {
                     type="checkbox" />
                     <span style={{color: concluidos[index]? "#ccc" : "#000"}} className='item-txt'>{item}</span>
                     
-                    <button style={{display: concluidos[index]? "none" : "block"}} onClick={()=> handleRemove(item)}>Remover</button>
+                    <button style={{display: concluidos[index]? "none" : "block"}} onClick={()=> handleRemove(item, index)}>Remover</button>
                     <button style={{display: concluidos[index]? "none" : "block"}} onClick={()=> handleEdit(index)}>Editar</button>
                   </div>
                 ))
