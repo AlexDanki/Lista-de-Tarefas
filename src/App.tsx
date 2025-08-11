@@ -16,7 +16,15 @@ function App() {
   const [concluidos, setConcluidos] = useState<string[]>([])
 
   useEffect(()=>{
+    const tarefasSalvas = localStorage.getItem("alexDev@test2")
+    if(tarefasSalvas)
+      setTasks(JSON.parse(tarefasSalvas))
 
+    const concluidosSalvos = localStorage.getItem("concluidoskey")
+    if(concluidosSalvos)
+      setConcluidos(JSON.parse(concluidosSalvos))
+
+    console.log(concluidos)
   },[])
 
   function handleAdd()
@@ -40,7 +48,7 @@ function App() {
     setTasks([...tasks, input])
     localStorage.setItem("alexDev@test2", JSON.stringify([...tasks, input]))
 
-    setConcluidos([...concluidos, 0])
+    setConcluidos([...concluidos])
     setInput("")
   }
 
@@ -72,7 +80,7 @@ function App() {
     const newList = [...concluidos]
     newList[i] = value;
     setConcluidos(newList)
-    console.log(newList);
+    localStorage.setItem("concluidoskey", JSON.stringify(newList))
   }
 
   return (
@@ -105,7 +113,7 @@ function App() {
               {
                 tasks && tasks.map((item, index) => (
                   <div className="item" key={index}>
-                    <input onChange={(e) => desabilitarTask(index, e.target.checked)}
+                    <input checked={concluidos[index] ? true : false} onChange={(e) => desabilitarTask(index, e.target.checked)}
                     type="checkbox" />
                     <span style={{color: concluidos[index]? "#ccc" : "#000"}} className='item-txt'>{item}</span>
                     
