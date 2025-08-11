@@ -99,7 +99,7 @@ function App() {
                   <div className="item" key={index}>
                     <input onChange={(e) => desabilitarTask(index, e.target.checked)}
                     type="checkbox" />
-                    <span className='item-txt'>{item}</span>
+                    <span style={{color: concluidos[index]? "#ccc" : "#000"}} className='item-txt'>{item}</span>
                     
                     <button style={{display: concluidos[index]? "none" : "block"}} onClick={()=> handleRemove(item)}>Remover</button>
                     <button style={{display: concluidos[index]? "none" : "block"}} onClick={()=> handleEdit(index)}>Editar</button>
