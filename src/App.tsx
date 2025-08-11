@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
 
   const [input, setInput] = useState("")
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<string[]>([]);
 
   const[editItem, setEditItem] = useState({
     enabled: false,
@@ -13,7 +13,19 @@ function App() {
 
   const [buttonText, setButtonText] = useState("ADICIONAR")
 
-  const [concluidos, setConcluidos] = useState([])
+  const [concluidos, setConcluidos] = useState<string[]>([])
+
+  useEffect(()=>{
+    const tarefasSalvas = localStorage.getItem("alexDev@test2")
+    if(tarefasSalvas)
+      setTasks(JSON.parse(tarefasSalvas))
+
+    const concluidosSalvos = localStorage.getItem("concluidoskey")
+    if(concluidosSalvos)
+      setConcluidos(JSON.parse(concluidosSalvos))
+
+    console.log(concluidos)
+  },[])
 
   function handleAdd()
   {
@@ -26,6 +38,7 @@ function App() {
       const novasTasks = [...tasks]
       novasTasks[editItem.index] = input
       setTasks(novasTasks)
+      localStorage.setItem("alexDev@test2", JSON.stringify(novasTasks))
       setInput("")
       editItem.enabled = false
       setButtonText("ADICIONAR")
@@ -33,14 +46,21 @@ function App() {
     }
     
     setTasks([...tasks, input])
-    setConcluidos([...concluidos, 0])
+    localStorage.setItem("alexDev@test2", JSON.stringify([...tasks, input]))
+
+    setConcluidos([...concluidos])
     setInput("")
   }
 
-  function handleRemove(item: string)
+  function handleRemove(item: string, index: number)
   {
     const novaLista = tasks.filter(i => i !== item)
     setTasks(novaLista)
+    localStorage.setItem("alexDev@test2", JSON.stringify(novaLista))
+
+     const indexRemoved = concluidos.filter((_, i) => i !== index)
+     setConcluidos(indexRemoved)
+     localStorage.setItem("concluidoskey", JSON.stringify(indexRemoved))
   }
 
   function handleEdit(index: number){
@@ -64,7 +84,7 @@ function App() {
     const newList = [...concluidos]
     newList[i] = value;
     setConcluidos(newList)
-    console.log(newList);
+    localStorage.setItem("concluidoskey", JSON.stringify(newList))
   }
 
   return (
@@ -97,11 +117,11 @@ function App() {
               {
                 tasks && tasks.map((item, index) => (
                   <div className="item" key={index}>
-                    <input onChange={(e) => desabilitarTask(index, e.target.checked)}
+                    <input checked={concluidos[index] ? true : false} onChange={(e) => desabilitarTask(index, e.target.checked)}
                     type="checkbox" />
                     <span style={{color: concluidos[index]? "#ccc" : "#000"}} className='item-txt'>{item}</span>
                     
-                    <button style={{display: concluidos[index]? "none" : "block"}} onClick={()=> handleRemove(item)}>Remover</button>
+                    <button style={{display: concluidos[index]? "none" : "block"}} onClick={()=> handleRemove(item, index)}>Remover</button>
                     <button style={{display: concluidos[index]? "none" : "block"}} onClick={()=> handleEdit(index)}>Editar</button>
                   </div>
                 ))
