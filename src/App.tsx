@@ -15,6 +15,8 @@ function App() {
     index: 0
   })
 
+  const [buttonText, setButtonText] = useState("ADICIONAR")
+
   function handleAdd()
   {
     if(!input){
@@ -28,6 +30,7 @@ function App() {
       setTasks(novasTasks)
       setInput("")
       editItem.enabled = false
+      setButtonText("ADICIONAR")
       return
     }
     
@@ -47,6 +50,7 @@ function App() {
       enabled: true,
       index:index
     })
+    setButtonText("SALVAR")
   }
 
   return (
@@ -69,7 +73,7 @@ function App() {
                   placeholder='Digite a tarefa'
                 />
 
-                <button onClick={handleAdd}>ADICIONAR</button>
+                <button onClick={handleAdd}>{buttonText}</button>
               </div>
              
             </div>
