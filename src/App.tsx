@@ -113,12 +113,6 @@ function App() {
     setTasks(newTaskList)
     localStorage.setItem("alexDev@test2", JSON.stringify(newTaskList))
 
-    const concluidosFormat = []
-    tarefaAFazer.map((item)=> {
-      if(item == null){
-        concluidosFormat.push("0")
-      }
-    })
     setConcluidos([...tarefaAFazer])
     localStorage.setItem("concluidoskey", JSON.stringify([...tarefaAFazer]))
 
