@@ -93,6 +93,7 @@ function App() {
 
   function handleStartClear()
   {
+    if(tasks.length < 1){ return }
     if(limpando){
       setLimpando(false)
       return
@@ -104,15 +105,24 @@ function App() {
     const tarefaAFazer = concluidos.filter((item)=> item != "1")
 
     const newTaskList = tasks.filter((item, index)=>{
-      if(concluidos[index] == "0"){
+      if(concluidos[index] != "1"){
         return item
       }
     })
 
     setTasks(newTaskList)
     localStorage.setItem("alexDev@test2", JSON.stringify(newTaskList))
-    setConcluidos(tarefaAFazer)
-    localStorage.setItem("concluidoskey", JSON.stringify(tarefaAFazer))
+
+    const concluidosFormat = []
+    tarefaAFazer.map((item)=> {
+      if(item == null){
+        concluidosFormat.push("0")
+      }
+    })
+    setConcluidos([...tarefaAFazer])
+    localStorage.setItem("concluidoskey", JSON.stringify([...tarefaAFazer]))
+
+    setLimpando(false)
   }
 
   return (
