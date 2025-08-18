@@ -5,6 +5,7 @@ function App() {
 
   const [input, setInput] = useState("")
   const [tasks, setTasks] = useState<string[]>([]);
+  const [limpando, setLimpando] = useState(false);
 
   const[editItem, setEditItem] = useState({
     enabled: false,
@@ -81,10 +82,37 @@ function App() {
         value =  1
     }
 
-    const newList = [...concluidos]
-    newList[i] = value;
-    setConcluidos(newList)
-    localStorage.setItem("concluidoskey", JSON.stringify(newList))
+    if(concluidos){
+      const newList = [...concluidos]
+      newList[i] = value;
+      setConcluidos(newList)
+      localStorage.setItem("concluidoskey", JSON.stringify(newList))
+    }
+
+  }
+
+  function handleStartClear()
+  {
+    if(limpando){
+      setLimpando(false)
+      return
+    }
+    setLimpando(true)
+  }
+
+  function handleLimparConcluidas(){
+    const tarefaAFazer = concluidos.filter((item)=> item != "1")
+
+    const newTaskList = tasks.filter((item, index)=>{
+      if(concluidos[index] == "0"){
+        return item
+      }
+    })
+
+    setTasks(newTaskList)
+    localStorage.setItem("alexDev@test2", JSON.stringify(newTaskList))
+    setConcluidos(tarefaAFazer)
+    localStorage.setItem("concluidoskey", JSON.stringify(tarefaAFazer))
   }
 
   return (
@@ -128,6 +156,19 @@ function App() {
               }
               
 
+            </div>
+
+            <div className="limpar-concluidas">
+              <button onClick={handleStartClear}>{limpando ? "Cancelar" : "Limpar concluidas"}</button>
+              {
+                limpando && (
+                  <div className="confirmar">
+                    <h3>Confirmar?</h3>
+                    <button onClick={handleLimparConcluidas}>Sim</button>
+                    <button onClick={()=>setLimpando(false)}>Não</button>
+                  </div>
+                )
+              }
             </div>
 
           </section>
