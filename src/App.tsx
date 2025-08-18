@@ -5,6 +5,7 @@ function App() {
 
   const [input, setInput] = useState("")
   const [tasks, setTasks] = useState<string[]>([]);
+  const [limpando, setLimpando] = useState(false);
 
   const[editItem, setEditItem] = useState({
     enabled: false,
@@ -90,6 +91,15 @@ function App() {
 
   }
 
+  function handleLimparConcluidas()
+  {
+    if(limpando){
+      setLimpando(false)
+      return
+    }
+    setLimpando(true)
+  }
+
   return (
     <div>
 
@@ -134,12 +144,16 @@ function App() {
             </div>
 
             <div className="limpar-concluidas">
-              <button>Limpar concluidas</button>
-              <div className="confirmar">
-                <h3>Confirmar?</h3>
-                <button>Sim</button>
-                <button>Não</button>
-              </div>
+              <button onClick={handleLimparConcluidas}>{limpando ? "Cancelar" : "Limpar concluidas"}</button>
+              {
+                limpando && (
+                  <div className="confirmar">
+                    <h3>Confirmar?</h3>
+                    <button>Sim</button>
+                    <button onClick={()=>setLimpando(false)}>Não</button>
+                  </div>
+                )
+              }
             </div>
 
           </section>
