@@ -68,3 +68,20 @@
   border:1px solid rgb(31, 177, 177);
   padding: 2px;
 }
+
+.limpar-concluidas{
+  display:flex;
+  gap:18px;
+}
+
+.limpar-concluidas button{
+  padding: 4px 8px;
+  color:rgb(31, 177, 177);
+  background-color: transparent;
+  border:1px solid rgb(31, 177, 177);
+}
+
+.confirmar{
+  display: flex;
+  gap:8px;
+}

@@ -81,10 +81,13 @@ function App() {
         value =  1
     }
 
-    const newList = [...concluidos]
-    newList[i] = value;
-    setConcluidos(newList)
-    localStorage.setItem("concluidoskey", JSON.stringify(newList))
+    if(concluidos){
+      const newList = [...concluidos]
+      newList[i] = value;
+      setConcluidos(newList)
+      localStorage.setItem("concluidoskey", JSON.stringify(newList))
+    }
+
   }
 
   return (
@@ -128,6 +131,15 @@ function App() {
               }
               
 
+            </div>
+
+            <div className="limpar-concluidas">
+              <button>Limpar concluidas</button>
+              <div className="confirmar">
+                <h3>Confirmar?</h3>
+                <button>Sim</button>
+                <button>Não</button>
+              </div>
             </div>
 
           </section>
