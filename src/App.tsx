@@ -84,7 +84,7 @@ function App() {
 
     if(concluidos){
       const newList = [...concluidos]
-      newList[i] = String();
+      newList[i] = String(value);
       setConcluidos(newList)
       localStorage.setItem("concluidoskey", JSON.stringify(newList))
     }
