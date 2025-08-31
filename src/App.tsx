@@ -84,7 +84,7 @@ function App() {
 
     if(concluidos){
       const newList = [...concluidos]
-      newList[i] = value;
+      newList[i] = String(value);
       setConcluidos(newList)
       localStorage.setItem("concluidoskey", JSON.stringify(newList))
     }
@@ -112,7 +112,7 @@ function App() {
 
     setTasks(newTaskList)
     localStorage.setItem("alexDev@test2", JSON.stringify(newTaskList))
-
+npm
     setConcluidos([...tarefaAFazer])
     localStorage.setItem("concluidoskey", JSON.stringify([...tarefaAFazer]))
 
